@@ -67,6 +67,11 @@ function calculateExpression(expression) {
   return eval(expression); // BUG: eval is dangerous and should never be used
 }
 
+// BUG: parseInt without radix — may cause unexpected octal/hex parsing in some environments
+function parseUserAge(ageString) {
+  return parseInt(ageString); // BUG: Missing radix (should be parseInt(ageString, 10))
+}
+
 module.exports = {
   findDuplicates,
   processItems,
@@ -74,4 +79,5 @@ module.exports = {
   buildCsvRow,
   sortUsers,
   calculateExpression,
+  parseUserAge, // Added without radix — AI reviewer should flag this
 };
